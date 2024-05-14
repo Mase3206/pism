@@ -58,7 +58,7 @@ def rocky_centos(pkg: pkgmgr.PackageManager):
 	pkg.install(['ncurses'])
 
 	cmd.log('Installing extras')
-	pkg.install(['which', 'nano', 'neovin', 'less', 'openssh-server'])
+	pkg.install(['which', 'nano', 'neovim', 'less', 'openssh-server'])
 
 
 
