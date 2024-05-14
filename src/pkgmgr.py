@@ -158,13 +158,25 @@ class PackageManager:
 		else:
 			cmd.log(f'PackageManager - distro "{distro}" is not in the list of known distros')
 			return 'unknown'
+		
+
+	def install(self, packages: list[str]):
+		self.packageManager.install(packages)
+
+	
+	def update(self):
+		self.packageManager.update()
+
+	
+	def remove(self, packages: list[str]):
+		self.packageManager.remove(packages)
 			
 
 
 def _tc():
 	pkg = Dnf()
 	pkg.update()
-	
+
 
 if __name__ == '__main__':
 	_tc()

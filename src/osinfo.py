@@ -1,6 +1,3 @@
-
-
-
 class Version:
 	def __init__(self, pretty: str, number: str, codename: str):
 		self.pretty = pretty
@@ -42,13 +39,16 @@ class Release:
 
 		# create dictionary from list of lines
 		for l in raw:
-			pair = l.split('=')
-			d[pair[0]] = pair[1][:-1]
+			pair = l[:-1].split('=')
+			if (pair[1][0] == "'" or pair[1][0] == '"') and (pair[1][-1] == "'" or pair[1][-1] == '"'):
+				d[pair[0]] = pair[1][1:-1]
+			else:
+				d[pair[0]] = pair[1]
 		
 		return d
 	
 	def __repr__(self) -> str:
-		return f"Release(name='{self.name}', version='{self.version}', distro='{self.distro}', platformID='{self.platformID}', pretty='{self.pretty}', ansiColor='{self.ansiColor}', logo='{self.logo}', cpeName='{self.cpeName}')"
+		return f"Release(name='{self.name}', version={self.version}, distro='{self.distro}', platformID='{self.platformID}', pretty='{self.pretty}', ansiColor='{self.ansiColor}', logo='{self.logo}', cpeName='{self.cpeName}')"
 
 
 def _tc():
