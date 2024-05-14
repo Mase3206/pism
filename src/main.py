@@ -12,13 +12,13 @@ def docker(pkg: pkgmgr.PackageManager, osRelease: osinfo.Release):
 	pkg.remove(['docker', 'docker-client', 'docker-client-latest', 'docker-common', 'docker-latest', 'docker-latest-logrotate', 'docker-logrotate', 'docker-selinux', 'docker-engine-selinux', 'docker-engine', 'podman'])
 
 	# add docker repo in the distro-specific way
-	if osRelease.name == 'fedora':
+	if osRelease.distro == 'fedora':
 		cmd.log('Importing Docker CE repo from download.docker.com')
 		cmd.run(['dnf', 'config-manager', '--add-repo', 'https://download.docker.com/linux/fedora/docker-ce.repo'])
-	elif osRelease.name == 'rocky' or osRelease.name == 'centos':
+	elif osRelease.distro == 'rocky' or osRelease.distro == 'centos':
 		cmd.log('Importing Docker CE repo from download.docker.com')
 		cmd.run(['dnf', 'config-manager', '--add-repo', 'https://download.docker.com/linux/centos/docker-ce.repo'])
-	elif osRelease.name == 'debian':
+	elif osRelease.distro == 'debian':
 		cmd.log('Installing ca-certificates and curl (required for Docker CE installation)')
 		pkg.install(['ca-certificates', 'curl'])
 
@@ -99,12 +99,12 @@ def ps1():
 
 def init():
 	osRelease = osinfo.Release()
-	if osRelease.name not in ['fedora', 'rocky', 'centos', 'debian']:
-		cmd.log(f'Detected distro {osRelease.name} is currently not supported for automatic setup installation. Only Fedora, Rocky, Cent OS, and Debian are supported at this time.')
-		return False
+	if osRelease.distro not in ['fedora', 'rocky', 'centos', 'debian']:
+		cmd.log(f'Detected distro {osRelease.distro} is currently not supported for automatic setup installation. Only Fedora, Rocky, Cent OS, and Debian are supported at this time.')
+		exit(1)
 
 	
-	parser = argparse.ArgumentParser(description='A very helpful automated script used for setting up VMs and LXCs in my homelab.')
+	parser = argparse.ArgumentParser(description='A very helpful automated script used for setting up VMs and LXCs in my homelab.', prog='pism')
 
 	# metavar='non_interactive',
 	parser.add_argument('--non-interactive', action='store_true', help='Run in non-interactive mode.')
@@ -150,13 +150,16 @@ def non_interactive(osRelease: osinfo.Release, installDocker: bool):
 
 	pkg.update()
 
-	if osRelease.name == 'fedora':
+	if osRelease.distro == 'fedora':
 		fedora(pkg)
-	elif osRelease.name == 'debian':
+	elif osRelease.distro == 'debian':
 		debian(pkg)
-	elif osRelease.name == 'rocky' or osRelease.name == 'centos':
+	elif osRelease.distro == 'rocky' or osRelease.distro == 'centos':
 		rocky_centos(pkg)
 
 	if installDocker:
 		docker(pkg, osRelease)
-	
+
+
+if __name__ == '__main__':
+	init()
