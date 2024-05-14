@@ -6,6 +6,9 @@ class Version:
 		self.pretty = pretty
 		self.id = number
 		self.codename = codename
+	
+	def __repr__(self) -> str:
+		return f"Version(pretty='{self.pretty}', id='{self.id}', codename='{self.codename}')"
 
 
 
@@ -28,11 +31,6 @@ class Release:
 		self.ansiColor = raw['ANSI_COLOR']
 		self.logo = raw['LOGO']
 		self.cpeName = raw['CPE_NAME']
-		self.defaultHostname = raw['DEFAULT_HOSTNAME'] 
-		self.homeURL = raw['HOME_URL']
-		self.documentationURL = raw['DOCUMENTATION_URL']
-		self.supportURL = raw['SUPPORT_URL']
-		self.bugReportURL = raw['BUG_REPORT_URL']
 		
 	
 
@@ -44,7 +42,19 @@ class Release:
 
 		# create dictionary from list of lines
 		for l in raw:
-			pair = l.split()
-			d[pair[0]] = pair[1]
+			pair = l.split('=')
+			d[pair[0]] = pair[1][:-1]
 		
 		return d
+	
+	def __repr__(self) -> str:
+		return f"Release(name='{self.name}', version='{self.version}', distro='{self.distro}', platformID='{self.platformID}', pretty='{self.pretty}', ansiColor='{self.ansiColor}', logo='{self.logo}', cpeName='{self.cpeName}')"
+
+
+def _tc():
+	r = Release()
+	a = repr(r)
+	print(r)
+
+if __name__ == '__main__':
+	_tc()
