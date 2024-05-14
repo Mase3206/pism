@@ -84,16 +84,20 @@ def debian(pkg: pkgmgr.PackageManager):
 
 
 def ps1():
-	command = [
-		'cat', '>>', '~/.bashrc', '<<', 'END\n',
-		'function', 'nonzero_return()', '{\n',
-		'\tRETVAL', '\\$?\n',
-		'\t[ \\$RETVAL -ne 0 ]', '&&', 'echo', '"<\\$RETVAL> "\n',
-		'\n',
-		'export', 'PS1="\\[\\e[31m\\]\\`nonzero_return\\`\\[\\e[m\\][\\[\\e[32m\\]\\u\\[\\e[m\\] @ \\[\\e[36m\\]\\h\\[\\e[m\\] ; \\[\\e[35m\\]\\W\\[\\e[m\\]] \\$ "\n',
-		'END'
-	]
-	cmd.run(command)
+	cmd.log('Setting PS1')
+	ps1var = """
+function nonzero_return() {
+	RETVAL=$?
+	[ $RETVAL -ne 0 ] && echo "<$RETVAL> "
+}
+
+export PS1="\\[\\e[31m\\]\\`nonzero_return\\`\\[\\e[m\\][\\[\\e[32m\\]\\u\\[\\e[m\\] @ \\[\\e[36m\\]\\h\\[\\e[m\\] ; \\[\\e[35m\\]\\W\\[\\e[m\\]] \\$ "
+"""
+	
+	with open('~/.bashrc', 'a') as bashrcF:
+		bashrcF.write(ps1var)
+
+	cmd.run(['source', '~/.bashrc'])
 
 
 
@@ -159,6 +163,8 @@ def non_interactive(osRelease: osinfo.Release, installDocker: bool):
 
 	if installDocker:
 		docker(pkg, osRelease)
+
+	ps1()
 
 
 if __name__ == '__main__':
