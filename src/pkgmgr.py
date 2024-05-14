@@ -1,8 +1,5 @@
-import osinfo
 import command as cmd
-import subprocess
-
-
+import osinfo
 
 
 class AptGet:

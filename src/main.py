@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
-import osinfo
-import pkgmgr
-import command as cmd
 import argparse
 
+import command as cmd
+import osinfo
+import pkgmgr
 
 
 def docker(pkg: pkgmgr.PackageManager, osRelease: osinfo.Release):
