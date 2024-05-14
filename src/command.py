@@ -15,7 +15,7 @@ def log(output: str, printOutput=True):
 		print(output)
 
 
-def run(command: list[str], printOutput=True, logOutput=True):
+def run(command: list[str], printOutput=False, logOutput=True):
 	"""
 	Run the given command.
 	"""
@@ -24,7 +24,7 @@ def run(command: list[str], printOutput=True, logOutput=True):
 		output = process.communicate()[0]\
 			.decode('utf-8')
 		
-		if printOutput:
-			print(output)
-		if logOutput:
-			log(output, printOutput=False)
+	if printOutput:
+		print(output)
+	if logOutput:
+		log(output, printOutput=False)
