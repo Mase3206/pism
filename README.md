@@ -12,3 +12,15 @@ By default, `pism` runs interactively, asking a couple of questions as it goes. 
 | :---: | :---- |
 | `--non-interactive` | Runs in the non-interactive mode. All options passed in via CLI are final. |
 | `--docker` | Installs Docker CE as part of the setup. |
+
+## Installation
+
+`pism` does not need to be installed. Simply pull the source and run it with the following commands:
+
+```bash
+git clone --depth=1 https://github.com/Mase3206/pism.git
+./pism/src/main.py
+```
+
+> [!NOTE]
+> `pism` only works in Linux, as it relies on the existence of the `/etc/os-release` file.
