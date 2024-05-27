@@ -85,7 +85,7 @@ class Pacman:
 		Run `pacman -S` with the specified list of packages.
 		"""
 
-		command = ['yes' | 'pacman', '-S']
+		command = ['yes', '|', 'pacman', '-S']
 		command += packages
 		cmd.run(command)
 
