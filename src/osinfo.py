@@ -15,9 +15,9 @@ class Release:
 
 		self.name = raw['NAME']
 		self.version = Version(
-			pretty = raw['VERSION'], 
-			number = raw['VERSION_ID'], 
-			codename = raw['VERSION_CODENAME']
+			pretty = raw.get('VERSION', ''), 
+			number = raw.get('VERSION_ID', ''), 
+			codename = raw.get('VERSION_CODENAME', '')
 		)
 		self.distro = raw['ID']
 		"""
@@ -25,9 +25,9 @@ class Release:
 		"""
 		self.platformID = raw['PLATFORM_ID']
 		self.pretty = raw['PRETTY_NAME']
-		self.ansiColor = raw['ANSI_COLOR']
-		self.logo = raw['LOGO']
-		self.cpeName = raw['CPE_NAME']
+		#self.ansiColor = raw['ANSI_COLOR']
+		#self.logo = raw['LOGO']
+		#self.cpeName = raw['CPE_NAME']
 		
 	
 
