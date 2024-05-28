@@ -152,6 +152,7 @@ def interactive(osRelease: osinfo.Release):
 def non_interactive(osRelease: osinfo.Release, installDocker: bool):
 	pkg = pkgmgr.PackageManager(osRelease)
 
+	cmd.log('Running updates')
 	pkg.update()
 
 	if osRelease.distro == 'fedora':
