@@ -95,11 +95,11 @@ function nonzero_return() \{
 export PS1="\\[\\e[31m\\]\\`nonzero_return\\`\\[\\e[m\\][\\[\\e[32m\\]\\u\\[\\e[m\\] @ \\[\\e[36m\\]\\h\\[\\e[m\\] ; \\[\\e[35m\\]\\W\\[\\e[m\\]] \\$ "
 """
 
-	bashrcPath = f'{os.path.expanduser('~')}/.bashrc'
+	bashrcPath = f'{os.path.expanduser("~")}/.bashrc'
 
 	with open(bashrcPath, 'a') as bashrcF:
 		bashrcF.write(ps1var)
-		bashrcF.write(f'export HOME="{os.path.expanduser('~')}"\n')
+		bashrcF.write(f'export HOME=\"{os.path.expanduser("~")}\"\n')
 
 	cmd.run(['source', bashrcPath])
 
