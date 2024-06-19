@@ -85,19 +85,23 @@ def debian(pkg: pkgmgr.PackageManager):
 
 def ps1():
 	cmd.log('Setting PS1')
+
 	ps1var = """
-function nonzero_return() {
+function nonzero_return() \{
 	RETVAL=$?
 	[ $RETVAL -ne 0 ] && echo "<$RETVAL> "
 }
 
 export PS1="\\[\\e[31m\\]\\`nonzero_return\\`\\[\\e[m\\][\\[\\e[32m\\]\\u\\[\\e[m\\] @ \\[\\e[36m\\]\\h\\[\\e[m\\] ; \\[\\e[35m\\]\\W\\[\\e[m\\]] \\$ "
 """
-	
-	with open('~/.bashrc', 'a') as bashrcF:
-		bashrcF.write(ps1var)
 
-	cmd.run(['source', '~/.bashrc'])
+	bashrcPath = f'{os.path.expanduser('~')}/.bashrc'
+
+	with open(bashrcPath, 'a') as bashrcF:
+		bashrcF.write(ps1var)
+		bashrcF.write(f'export HOME="{os.path.expanduser('~')}"\n')
+
+	cmd.run(['source', bashrcPath])
 
 
 
