@@ -5,6 +5,7 @@ import argparse
 import command as cmd
 import osinfo
 import pkgmgr
+import os
 
 
 def docker(pkg: pkgmgr.PackageManager, osRelease: osinfo.Release):
