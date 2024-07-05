@@ -88,7 +88,7 @@ def ps1():
 	cmd.log('Setting PS1')
 
 	ps1var = """
-function nonzero_return() \{
+function nonzero_return() {
 	RETVAL=$?
 	[ $RETVAL -ne 0 ] && echo "<$RETVAL> "
 }
