@@ -19,7 +19,7 @@ By default, `pism` runs interactively, asking a couple of questions as it goes. 
 
 ```bash
 curl -o pism-main.zip https://codeload.github.com/Mase3206/pism/zip/refs/heads/main
-unzip pism-main.py
+unzip pism-main.zip
 ./pism-main/src/main.py
 rm -rf pism-main pism-main.zip
 ```
