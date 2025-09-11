@@ -18,8 +18,10 @@ By default, `pism` runs interactively, asking a couple of questions as it goes. 
 `pism` does not need to be installed. Simply pull the source and run it with the following commands:
 
 ```bash
-git clone --depth=1 https://github.com/Mase3206/pism.git
-./pism/src/main.py
+curl -o pism-main.zip https://codeload.github.com/Mase3206/pism/zip/refs/heads/main
+unzip pism-main.py
+./pism-main/src/main.py
+rm -rf pism-main pism-main.zip
 ```
 
 > [!NOTE]
