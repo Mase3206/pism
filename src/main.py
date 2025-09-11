@@ -59,7 +59,7 @@ def rocky_centos(pkg: pkgmgr.PackageManager):
 	pkg.install(['ncurses'])
 
 	cmd.log('Installing extras')
-	pkg.install(['which', 'nano', 'neovim', 'less', 'openssh-server', 'man'])
+	pkg.install(['which', 'nano', 'vim', 'less', 'openssh-server', 'man', 'wget'])
 
 
 
@@ -71,7 +71,7 @@ def fedora(pkg: pkgmgr.PackageManager):
 	pkg.install(['dnf-plugins-core'])
 
 	cmd.log('Installing extras')
-	pkg.install(['which', 'nano', 'neovim', 'less', 'openssh-server', 'man'])
+	pkg.install(['which', 'nano', 'vim', 'less', 'openssh-server', 'man', 'wget'])
 
 
 
@@ -80,7 +80,7 @@ def debian(pkg: pkgmgr.PackageManager):
 	Run Debian-specific commands, including installing some extras.
 	"""
 	cmd.log('Installing extras')
-	pkg.install(['nano', 'neovim', 'less', 'sudo', 'man'])
+	pkg.install(['nano', 'vim', 'less', 'sudo', 'man', 'wget'])
 
 
 
