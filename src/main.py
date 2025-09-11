@@ -102,7 +102,7 @@ export PS1="\\[\\e[31m\\]\\`nonzero_return\\`\\[\\e[m\\][\\[\\e[32m\\]\\u\\[\\e[
 		bashrcF.write(ps1var)
 		bashrcF.write(f'export HOME=\"{os.path.expanduser("~")}\"\n')
 
-	cmd.run(['source', bashrcPath])
+	cmd.run(['source', bashrcPath], shell=True)
 
 
 
